@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApiGroupeEditDlg" widgetVar="ApiGroupeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditApiGroupeTitle}">
+            <h:form id="ApiGroupeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apiGroupeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditApiGroupeLabel_libelle}" for="libelle" />
+                        <p:inputText id="libelle" value="#{apiGroupeController.selected.libelle}" title="#{bundle.EditApiGroupeTitle_libelle}" />
+                        <p:outputLabel value="#{bundle.EditApiGroupeLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{apiGroupeController.selected.numero}" title="#{bundle.EditApiGroupeTitle_numero}" />
+                        <p:outputLabel value="#{bundle.EditApiGroupeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{apiGroupeController.selected.description}" title="#{bundle.EditApiGroupeTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditApiGroupeLabel_api}" for="api" />
+                        <p:selectOneMenu id="api" value="#{apiGroupeController.selected.api}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{apiController.itemsAvailableSelectOne}"
+                                           var="apiItem"
+                                           itemValue="#{apiItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditApiGroupeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{apiGroupeController.selected.id}" title="#{bundle.EditApiGroupeTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{apiGroupeController.update}" value="#{bundle.Save}" update="display,:ApiGroupeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ApiGroupeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApiGroupeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

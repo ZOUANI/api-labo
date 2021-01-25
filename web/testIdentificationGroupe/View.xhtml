@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestIdentificationGroupeViewDlg" widgetVar="TestIdentificationGroupeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTestIdentificationGroupeTitle}">
+            <h:form id="TestIdentificationGroupeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testIdentificationGroupeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTestIdentificationGroupeLabel_apiGroupe}"/>
+                        <h:outputText value="#{testIdentificationGroupeController.selected.apiGroupe}" title="#{bundle.ViewTestIdentificationGroupeTitle_apiGroupe}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationGroupeLabel_testIdentificationApi}"/>
+                        <h:outputText value="#{testIdentificationGroupeController.selected.testIdentificationApi}" title="#{bundle.ViewTestIdentificationGroupeTitle_testIdentificationApi}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationGroupeLabel_code}"/>
+                        <h:outputText value="#{testIdentificationGroupeController.selected.code}" title="#{bundle.ViewTestIdentificationGroupeTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationGroupeLabel_id}"/>
+                        <h:outputText value="#{testIdentificationGroupeController.selected.id}" title="#{bundle.ViewTestIdentificationGroupeTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TestIdentificationGroupeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTestIdentificationApiTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TestIdentificationApiListForm">
+                <p:panel header="#{bundle.ListTestIdentificationApiTitle}">
+                    <p:dataTable id="datalist" value="#{testIdentificationApiController.items}" var="item"
+                                 selectionMode="single" selection="#{testIdentificationApiController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_reference}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reference}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_referencPatient}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.referencPatient}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_dateTestIdentificationApi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateTestIdentificationApi}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_identification}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.identification}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_apiBacterie}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apiBacterie}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationApiTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <!--<p:commandButton id="createButton" icon="ui-icon-plus"   value="# {bundle.Create}" actionListener="#{testIdentificationApiController.prepareCreate}" update=":TestIdentificationApiCreateForm" oncomplete="PF('TestIdentificationApiCreateDialog').show()"/>-->
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TestIdentificationApiViewForm" oncomplete="PF('TestIdentificationApiViewDialog').show()" disabled="#{empty testIdentificationApiController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TestIdentificationApiEditForm" oncomplete="PF('TestIdentificationApiEditDialog').show()" disabled="#{empty testIdentificationApiController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{testIdentificationApiController.destroy}" update=":growl,datalist" disabled="#{empty testIdentificationApiController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApiBacterieCreateDlg" widgetVar="ApiBacterieCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateApiBacterieTitle}">
+            <h:form id="ApiBacterieCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apiBacterieController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateApiBacterieLabel_reference}" for="reference" />
+                        <p:inputText id="reference" value="#{apiBacterieController.selected.reference}" title="#{bundle.CreateApiBacterieTitle_reference}" />
+                        <p:outputLabel value="#{bundle.CreateApiBacterieLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{apiBacterieController.selected.description}" title="#{bundle.CreateApiBacterieTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateApiBacterieLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{apiBacterieController.selected.id}" title="#{bundle.CreateApiBacterieTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{apiBacterieController.create}" value="#{bundle.Save}" update="display,:ApiBacterieListForm:datalist,:growl" oncomplete="handleSubmit(args,'ApiBacterieCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApiBacterieCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApiBookViewDlg" widgetVar="ApiBookViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewApiBookTitle}">
+            <h:form id="ApiBookViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apiBookController.selected != null}">
+                        <h:outputText value="#{bundle.ViewApiBookLabel_identification}"/>
+                        <h:outputText value="#{apiBookController.selected.identification}" title="#{bundle.ViewApiBookTitle_identification}"/>
+                        <h:outputText value="#{bundle.ViewApiBookLabel_apiBacterie}"/>
+                        <h:outputText value="#{apiBookController.selected.apiBacterie}" title="#{bundle.ViewApiBookTitle_apiBacterie}"/>
+                        <h:outputText value="#{bundle.ViewApiBookLabel_id}"/>
+                        <h:outputText value="#{apiBookController.selected.id}" title="#{bundle.ViewApiBookTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ApiBookViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

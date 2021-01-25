@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestIdentificationElementEditDlg" widgetVar="TestIdentificationElementEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTestIdentificationElementTitle}">
+            <h:form id="TestIdentificationElementEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testIdentificationElementController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTestIdentificationElementLabel_apiElement}" for="apiElement" />
+                        <p:selectOneMenu id="apiElement" value="#{testIdentificationElementController.selected.apiElement}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{apiElementController.itemsAvailableSelectOne}"
+                                           var="apiElementItem"
+                                           itemValue="#{apiElementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTestIdentificationElementLabel_poids}" for="poids" />
+                        <p:inputText id="poids" value="#{testIdentificationElementController.selected.poids}" title="#{bundle.EditTestIdentificationElementTitle_poids}" />
+                        <p:outputLabel value="#{bundle.EditTestIdentificationElementLabel_couleur}" for="couleur" />
+                        <p:selectOneMenu id="couleur" value="#{testIdentificationElementController.selected.couleur}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{couleurController.itemsAvailableSelectOne}"
+                                           var="couleurItem"
+                                           itemValue="#{couleurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTestIdentificationElementLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{testIdentificationElementController.selected.id}" title="#{bundle.EditTestIdentificationElementTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{testIdentificationElementController.update}" value="#{bundle.Save}" update="display,:TestIdentificationElementListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TestIdentificationElementEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TestIdentificationElementEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

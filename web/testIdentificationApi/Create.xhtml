@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTestIdentificationApiTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TestIdentificationApiCreateForm">
+                <p:panel header="Info Identification">
+                    <p:panelGrid columns="9">
+
+                        <p:outputLabel value="#{bundle.CreateTestIdentificationApiLabel_referencPatient}" for="referencPatient" />
+                        <p:inputText id="referencPatient" value="#{testIdentificationApiController.selected.referencPatient}" title="#{bundle.CreateTestIdentificationApiTitle_referencPatient}" />
+                       
+                        <p:outputLabel value="#{bundle.CreateTestIdentificationApiLabel_dateTestIdentificationApi}" for="dateTestIdentificationApi" />
+                        <p:calendar id="dateTestIdentificationApi" pattern="MM/dd/yyyy HH:mm:ss" value="#{testIdentificationApiController.selected.dateTestIdentificationApi}" title="#{bundle.EditTestIdentificationApiTitle_dateTestIdentificationApi}"  showOn="button"/>
+                       
+                        <p:outputLabel value="#{bundle.CreateTestIdentificationApiLabel_identification}" for="identification" />
+                        <p:inputText id="identification" value="#{testIdentificationApiController.selected.identification}" title="#{bundle.CreateTestIdentificationApiTitle_identification}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateTestIdentificationApiLabel_apiBacterie}" for="apiBacterie" />
+                        <p:selectOneMenu id="apiBacterie" value="#{testIdentificationApiController.selected.apiBacterie}" >
+                            <f:selectItem  itemValue="#{null}" itemLabel="--------"/>
+                            <f:selectItems value="#{apiBacterieController.itemsAvailableSelectOne}"
+                                           var="apiBacterieItem"
+                                           itemValue="#{apiBacterieItem}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton actionListener="#{testIdentificationApiController.init()}" value="Initialiser" update=":TestIdentificationApiCreateForm" />
+
+                    </p:panelGrid>
+               </p:panel>
+
+
+                <p:panel header="Api Element Couleure">
+                    <p:dataTable id="datalist" value="#{testIdentificationApiController.testIdentificationElements}" var="item"
+                                 selectionMode="single" selection="#{testIdentificationApiController.testIdentificationElement}"
+                                 paginator="true"
+                                 rowKey="#{item.apiElement.id}"
+                                 rows="20" editable="true"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                      
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationElementTitle_apiElement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apiElement.libelle} (Groupe :#{item.apiElement.apiGroupe.numero}, Numero #{item.apiElement.numero})"/>
+                        </p:column>
+
+                       <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationElementTitle_couleur}"/>
+                            </f:facet>
+                           <h:outputText value="#{item.couleur.code}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTestIdentificationElementTitle_poids}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.poidsSelected}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Vrai?"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.selected}">
+                                <p:ajax update=":TestIdentificationApiCreateForm,:growl" listener="#{testIdentificationApiController.changePoids(item)}"/>
+                            </p:selectBooleanCheckbox> 
+                        </p:column>
+
+
+
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>  
+
+    </ui:composition>
+</html>

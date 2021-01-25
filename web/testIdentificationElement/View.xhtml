@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestIdentificationElementViewDlg" widgetVar="TestIdentificationElementViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTestIdentificationElementTitle}">
+            <h:form id="TestIdentificationElementViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testIdentificationElementController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTestIdentificationElementLabel_apiElement}"/>
+                        <h:outputText value="#{testIdentificationElementController.selected.apiElement}" title="#{bundle.ViewTestIdentificationElementTitle_apiElement}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationElementLabel_poids}"/>
+                        <h:outputText value="#{testIdentificationElementController.selected.poids}" title="#{bundle.ViewTestIdentificationElementTitle_poids}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationElementLabel_couleur}"/>
+                        <h:outputText value="#{testIdentificationElementController.selected.couleur}" title="#{bundle.ViewTestIdentificationElementTitle_couleur}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationElementLabel_id}"/>
+                        <h:outputText value="#{testIdentificationElementController.selected.id}" title="#{bundle.ViewTestIdentificationElementTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TestIdentificationElementViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

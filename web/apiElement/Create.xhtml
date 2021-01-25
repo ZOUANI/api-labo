@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApiElementCreateDlg" widgetVar="ApiElementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateApiElementTitle}">
+            <h:form id="ApiElementCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apiElementController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateApiElementLabel_libelle}" for="libelle" />
+                        <p:inputText id="libelle" value="#{apiElementController.selected.libelle}" title="#{bundle.CreateApiElementTitle_libelle}" />
+                        <p:outputLabel value="#{bundle.CreateApiElementLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{apiElementController.selected.description}" title="#{bundle.CreateApiElementTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateApiElementLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{apiElementController.selected.numero}" title="#{bundle.CreateApiElementTitle_numero}" />
+                        <p:outputLabel value="#{bundle.CreateApiElementLabel_poids}" for="poids" />
+                        <p:inputText id="poids" value="#{apiElementController.selected.poids}" title="#{bundle.CreateApiElementTitle_poids}" />
+                        <p:outputLabel value="#{bundle.CreateApiElementLabel_apiGroupe}" for="apiGroupe" />
+                        <p:selectOneMenu id="apiGroupe" value="#{apiElementController.selected.apiGroupe}" >
+                            <f:selectItems value="#{apiGroupeController.itemsAvailableSelectOne}"
+                                           var="apiGroupeItem"
+                                           itemValue="#{apiGroupeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateApiElementLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{apiElementController.selected.id}" title="#{bundle.CreateApiElementTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{apiElementController.create}" value="#{bundle.Save}" update="display,:ApiElementListForm:datalist,:growl" oncomplete="handleSubmit(args,'ApiElementCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApiElementCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

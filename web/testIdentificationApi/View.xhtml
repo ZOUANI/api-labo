@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TestIdentificationApiViewDlg" widgetVar="TestIdentificationApiViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTestIdentificationApiTitle}">
+            <h:form id="TestIdentificationApiViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{testIdentificationApiController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_reference}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.reference}" title="#{bundle.ViewTestIdentificationApiTitle_reference}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_referencPatient}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.referencPatient}" title="#{bundle.ViewTestIdentificationApiTitle_referencPatient}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_dateTestIdentificationApi}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.dateTestIdentificationApi}" title="#{bundle.ViewTestIdentificationApiTitle_dateTestIdentificationApi}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_identification}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.identification}" title="#{bundle.ViewTestIdentificationApiTitle_identification}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_apiBacterie}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.apiBacterie}" title="#{bundle.ViewTestIdentificationApiTitle_apiBacterie}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_description}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.description}" title="#{bundle.ViewTestIdentificationApiTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewTestIdentificationApiLabel_id}"/>
+                        <h:outputText value="#{testIdentificationApiController.selected.id}" title="#{bundle.ViewTestIdentificationApiTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TestIdentificationApiViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

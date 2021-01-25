@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApiBookletViewDlg" widgetVar="ApiBookletViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewApiBookletTitle}">
+            <h:form id="ApiBookletViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{apiBookletController.selected != null}">
+                        <h:outputText value="#{bundle.ViewApiBookletLabel_apiElement}"/>
+                        <h:outputText value="#{apiBookletController.selected.apiElement}" title="#{bundle.ViewApiBookletTitle_apiElement}"/>
+                        <h:outputText value="#{bundle.ViewApiBookletLabel_couleur}"/>
+                        <h:outputText value="#{apiBookletController.selected.couleur}" title="#{bundle.ViewApiBookletTitle_couleur}"/>
+                       
+                        <p:outputLabel value="Positif" for="positif" />
+                        <p:selectBooleanCheckbox id="positif" value="#{apiBookletController.selected.positif}" />
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ApiBookletViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

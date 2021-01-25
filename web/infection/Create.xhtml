@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InfectionCreateDlg" widgetVar="InfectionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInfectionTitle}">
+            <h:form id="InfectionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{infectionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInfectionLabel_libelle}" for="libelle" />
+                        <p:inputText id="libelle" value="#{infectionController.selected.libelle}" title="#{bundle.CreateInfectionTitle_libelle}" />
+                        <p:outputLabel value="#{bundle.CreateInfectionLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{infectionController.selected.description}" title="#{bundle.CreateInfectionTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateInfectionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{infectionController.selected.id}" title="#{bundle.CreateInfectionTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{infectionController.create}" value="#{bundle.Save}" update="display,:InfectionListForm:datalist,:growl" oncomplete="handleSubmit(args,'InfectionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InfectionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
